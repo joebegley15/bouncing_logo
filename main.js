@@ -61,7 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function getRandomArray(n, x) {
-        return Array.from({ length: n }, () => Math.floor(Math.random() * x) + 1);
+        const arr = [];
+        for (let i = n; i <= x; i++) {
+            arr.push(i);
+        }
+        return arr.sort(() => .5 - Math.random());
     }
 
     const imageCount = 30;
@@ -73,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloadedImages = [];
 
     function preloadImages(urls) {
+        console.log(urls);
         urls.forEach(url => {
             const img = new Image();
             img.src = url;
@@ -81,14 +86,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     preloadImages(orderedImageUrlList);
 
-    let currentImage = 0;
+    let currentImage = 1;
 
 
 
     const changeImage = () => {
-        const imageUrl = orderedImageUrlList[currentImage];
-        document.getElementById("logo").style.background = preloadImages[currentImage];
-        currentImage = currentImage === imageCount ? 0 : currentImage++;
+        console.log(currentImage, imageCount);
+        const imageUrl = `images/${currentImage}.jpg`;
+        document.getElementById("logo").style.background = `url('${imageUrl}')`
+        currentImage = currentImage === imageCount ? 0 : currentImage + 1;
     }
 
 
