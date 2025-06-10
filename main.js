@@ -61,17 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // if (currentPositionHor === pageHeight - 50) {
-        //     if (direction === 0) {
-        //         direction = 0;
-        //     }
-        //     if (direction === 2) {
-        //         direction = 2;
-        //     }
-        // }
-        // if (currentPositionVert === 0) {
-        //     if 
-        // }
+        if (currentPositionHor === pageWidth - 50) {
+            if (direction === 0) {
+                direction = 1;
+            }
+            if (direction === 2) {
+                direction = 3;
+            }
+        }
     }
 
     const move = () => {
