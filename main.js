@@ -18,15 +18,87 @@ document.addEventListener('DOMContentLoaded', () => {
     logoElement.style.top = `${randomVert}px`;
     logoElement.style.left = `${randomHor}px`;
 
-    const UpRight = () => {
-        currentPositionVert += 1;
-        currentPositionHor += 1;
-    }
 
     let currentPositionVert = randomVert;
     let currentPositionHor = randomHor;
 
-    setInterval(() => {
+    const positions = {
+        0: "upRight",
+        1: "upLeft",
+        2: "downRight",
+        3: "downLeft"
+    }
 
+    let direction = Math.floor(Math.random() * 4);
+
+    console.log(direction, positions[direction])
+
+
+    const adjustDirection = () => {
+        // corner cases
+        if (currentPositionHor === 0 && currentPositionVert === 0) {
+            direction = 2;
+            return;
+        }
+        if (currentPositionHor === pageHeight - 50 && currentPositionVert === pageWidth - 50) {
+            direction = 1;
+            return;
+        }
+        if (currentPositionHor === pageHeight - 50 && currentPositionVert === 0) {
+            direction = 0;
+            return;
+        }
+        if (currentPositionHor === 0 && currentPositionVert === pageWidth - 50) {
+            direction = 3;
+            return;
+        }
+        if (currentPositionHor === 0) {
+            if (direction === 1) {
+                direction = 0;
+            }
+            if (direction === 3) {
+                direction = 2;
+            }
+        }
+
+        // if (currentPositionHor === pageHeight - 50) {
+        //     if (direction === 0) {
+        //         direction = 0;
+        //     }
+        //     if (direction === 2) {
+        //         direction = 2;
+        //     }
+        // }
+        // if (currentPositionVert === 0) {
+        //     if 
+        // }
+    }
+
+    const move = () => {
+        switch (direction) {
+            case 0:
+                currentPositionHor++;
+                currentPositionVert++;
+                break;
+            case 1:
+                currentPositionHor--;
+                currentPositionVert++;
+                break;
+            case 2:
+                currentPositionHor++;
+                currentPositionVert--;
+                break;
+            case 3:
+                currentPositionHor--;
+                currentPositionVert--;
+                break;
+        }
+        logoElement.style.top = `${currentPositionVert}px`;
+        logoElement.style.left = `${currentPositionHor}px`;
+    }
+
+    setInterval(() => {
+        adjustDirection();
+        move();
     }, 10)
 });
