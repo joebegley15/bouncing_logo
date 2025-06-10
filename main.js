@@ -1,31 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Your code here runs after the HTML is fully parsed
-    const gridElement = document.getElementById('grid');
+    // Create Logo and Add it.
+    const containerEl = document.getElementById('container');
+    const logoElement = document.createElement('div');
+    logoElement.id = 'logo';
+    containerEl.appendChild(logoElement);
+
+    // Create it's starting position
     const pageWidth = window.innerWidth;
     console.log('Page width:', pageWidth);
 
     const pageHeight = window.innerHeight;
     console.log('Page height', window.innerHeight);
 
-    for (let i = 0; i < pageHeight / 10 - 1; i++) {
-        const rowElement = document.createElement('div');
-        rowElement.classList.add('row');
-        rowElement.id = `row-${i}`;
-        gridElement.appendChild(rowElement);
-        for (let y = 0; y < pageWidth / 10; y++) {
-            const tileElement = document.createElement('div');
-            tileElement.classList.add('tile');
-            tileElement.id = `tile-${i}-${y}`;
-            rowElement.appendChild(tileElement);
-        }
+    const randomVert = Math.max(Math.floor(Math.random() * pageHeight) - 50, 0);
+    const randomHor = Math.max(Math.floor(Math.random() * pageWidth) - 50, 0);
+
+    logoElement.style.top = `${randomVert}px`;
+    logoElement.style.left = `${randomHor}px`;
+
+    const UpRight = () => {
+        currentPositionVert += 1;
+        currentPositionHor += 1;
     }
 
-    const randomVert = Math.floor(Math.random() * document.innerHeight / 10);
-    const randomHor = Math.floor(Math.random() * document.innerWidth / 10)
-
-    console.log(randomVert, randomHor)
+    let currentPositionVert = randomVert;
+    let currentPositionHor = randomHor;
 
     setInterval(() => {
 
-    }, 100);
+    }, 10)
 });

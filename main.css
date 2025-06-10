@@ -1,15 +1,16 @@
-body {
-	margin: 0;
+#container {
+	width: 100vw;
+	height: 100vh;
+	background-color: black;
 }
 
-.tile {
-	height: 10px;
-	width: 10px;
-	border: 1px solid black;
-	box-sizing: border-box;
+#logo {
+	height: 50px;
+	width: 50px;
 	background-color: yellow;
+	position: absolute;
 }
 
-.row {
-	display: flex;
+body {
+	margin: 0px;
 }
