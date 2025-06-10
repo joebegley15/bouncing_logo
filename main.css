@@ -1,0 +1,15 @@
+body {
+	margin: 0;
+}
+
+.tile {
+	height: 10px;
+	width: 10px;
+	border: 1px solid black;
+	box-sizing: border-box;
+	background-color: yellow;
+}
+
+.row {
+	display: flex;
+}
