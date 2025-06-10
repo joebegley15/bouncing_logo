@@ -69,25 +69,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 direction = 3;
             }
         }
+
+        if (currentPositionVert === pageHeight - 50) {
+            if (direction === 2) {
+                direction = 0;
+            }
+            if (direction === 3) {
+                direction = 1;
+            }
+        }
+
+        if (currentPositionVert === 0) {
+            if (direction === 0) {
+                direction = 2;
+            }
+            if (direction === 1) {
+                direction = 3;
+            }
+        }
     }
 
     const move = () => {
         switch (direction) {
             case 0:
                 currentPositionHor++;
-                currentPositionVert++;
+                currentPositionVert--;
                 break;
             case 1:
                 currentPositionHor--;
-                currentPositionVert++;
+                currentPositionVert--;
                 break;
             case 2:
                 currentPositionHor++;
-                currentPositionVert--;
+                currentPositionVert++;
                 break;
             case 3:
                 currentPositionHor--;
-                currentPositionVert--;
+                currentPositionVert++;
                 break;
         }
         logoElement.style.top = `${currentPositionVert}px`;
