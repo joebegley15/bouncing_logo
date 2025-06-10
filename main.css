@@ -12,7 +12,7 @@
 }
 
 #main-txt {
-	color: red;
+	color: white;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -30,6 +30,10 @@
 
 #main-txt .subtext {
 	font-size: 32px;
+}
+
+#main-txt a {
+	color: red;
 }
 
 body {
