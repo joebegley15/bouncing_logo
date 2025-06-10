@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     containerEl.appendChild(logoElement);
 
     // Create it's starting position
-    const pageWidth = window.innerWidth;
+    let pageWidth = window.innerWidth;
     console.log('Page width:', pageWidth);
 
-    const pageHeight = window.innerHeight;
+    let pageHeight = window.innerHeight;
     console.log('Page height', window.innerHeight);
 
     const randomVert = Math.max(Math.floor(Math.random() * pageHeight) - 50, 0);
@@ -31,7 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let direction = Math.floor(Math.random() * 4);
 
-    console.log(direction, positions[direction])
+    const resetOnResize = () => {
+        console.log("HIT")
+        const logo = document.getElementById('logo');
+
+        // Get current position as percentages of old screen size
+        const percentTop = parseFloat(logo.style.top) / pageHeight;
+        const percentLeft = parseFloat(logo.style.left) / pageWidth;
+
+        // Update window dimensions
+        pageWidth = window.innerWidth;
+        pageHeight = window.innerHeight;
+
+        // Recalculate pixel positions based on new screen size
+        const newTop = percentTop * pageHeight;
+        const newLeft = percentLeft * pageWidth;
+
+        logo.style.top = `${newTop}px`;
+        logo.style.left = `${newLeft}px`;
+
+        // Optionally reset other properties or behavior here
+    };
+
+    window.addEventListener('resize', resetOnResize);
 
 
     const adjustDirection = () => {
@@ -52,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             direction = 3;
             return;
         }
-        if (currentPositionHor === 0) {
+        if (currentPositionHor <= 0) {
             if (direction === 1) {
                 direction = 0;
             }
@@ -61,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if (currentPositionHor === pageWidth - 50) {
+        if (currentPositionHor >= pageWidth - 50) {
             if (direction === 0) {
                 direction = 1;
             }
@@ -70,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if (currentPositionVert === pageHeight - 50) {
+        if (currentPositionVert >= pageHeight - 50) {
             if (direction === 2) {
                 direction = 0;
             }
@@ -79,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if (currentPositionVert === 0) {
+        if (currentPositionVert <= 0) {
             if (direction === 0) {
                 direction = 2;
             }
