@@ -59,9 +59,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', resetOnResize);
 
+
+    function getRandomArray(n, x) {
+        return Array.from({ length: n }, () => Math.floor(Math.random() * x) + 1);
+    }
+
+    const imageCount = 30;
+
+    const orderedImageNumberList = getRandomArray(1, imageCount);
+
+    const orderedImageUrlList = orderedImageNumberList.map(x => `images/${x}.jpg`);
+
+    const preloadedImages = [];
+
+    function preloadImages(urls) {
+        urls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+            preloadedImages.push(img);
+        });
+    }
+    preloadImages(orderedImageUrlList);
+
+    let currentImage = 0;
+
+
+
     const changeImage = () => {
-        const imageUrl = `images/${Math.ceil(Math.random() * 30)}.jpg`;
-        document.getElementById("logo").style.background = `url('${imageUrl}')`
+        const imageUrl = orderedImageUrlList[currentImage];
+        document.getElementById("logo").style.background = preloadImages[currentImage];
+        currentImage = currentImage === imageCount ? 0 : currentImage++;
     }
 
 
