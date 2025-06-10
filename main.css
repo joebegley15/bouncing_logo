@@ -5,10 +5,31 @@
 }
 
 #logo {
-	height: 50px;
-	width: 50px;
-	background-color: yellow;
 	position: absolute;
+	background-size: cover !important;
+	background-position: center !important;
+	background-repeat: no-repeat;
+}
+
+#main-txt {
+	color: red;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family: "Oswald";
+	font-size: 49px;
+	justify-content: center;
+	align-items: center;
+	display: grid;
+}
+
+#main-txt .maintext {
+	margin: 0 auto;
+}
+
+#main-txt .subtext {
+	font-size: 32px;
 }
 
 body {

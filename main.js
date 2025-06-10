@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoElement = document.createElement('div');
     logoElement.id = 'logo';
     containerEl.appendChild(logoElement);
+    const size = 200;
+    logoElement.style.height = `${size}px`;
+    logoElement.style.width = `${size}px`;
 
     // Create it's starting position
     let pageWidth = window.innerWidth;
@@ -12,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let pageHeight = window.innerHeight;
     console.log('Page height', window.innerHeight);
 
-    const randomVert = Math.max(Math.floor(Math.random() * pageHeight) - 50, 0);
-    const randomHor = Math.max(Math.floor(Math.random() * pageWidth) - 50, 0);
+    const randomVert = Math.max(Math.floor(Math.random() * pageHeight) - size, 0);
+    const randomHor = Math.max(Math.floor(Math.random() * pageWidth) - size, 0);
 
     logoElement.style.top = `${randomVert}px`;
     logoElement.style.left = `${randomHor}px`;
@@ -22,12 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPositionVert = randomVert;
     let currentPositionHor = randomHor;
 
-    const positions = {
-        0: "upRight",
-        1: "upLeft",
-        2: "downRight",
-        3: "downLeft"
-    }
+    // Positions meaning
+    // const positions = {
+    //     0: "upRight",
+    //     1: "upLeft",
+    //     2: "downRight",
+    //     3: "downLeft"
+    // }
 
     let direction = Math.floor(Math.random() * 4);
 
@@ -55,58 +59,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', resetOnResize);
 
+    const changeImage = () => {
+        const imageUrl = `images/${Math.ceil(Math.random() * 30)}.jpg`;
+        document.getElementById("logo").style.background = `url('${imageUrl}')`
+    }
+
 
     const adjustDirection = () => {
         // corner cases
         if (currentPositionHor === 0 && currentPositionVert === 0) {
             direction = 2;
-            return;
+            return changeImage();
         }
-        if (currentPositionHor === pageHeight - 50 && currentPositionVert === pageWidth - 50) {
+        if (currentPositionHor === pageHeight - size && currentPositionVert === pageWidth - size) {
             direction = 1;
-            return;
+            return changeImage();
         }
-        if (currentPositionHor === pageHeight - 50 && currentPositionVert === 0) {
+        if (currentPositionHor === pageHeight - size && currentPositionVert === 0) {
             direction = 0;
-            return;
+            return changeImage();
         }
-        if (currentPositionHor === 0 && currentPositionVert === pageWidth - 50) {
+        if (currentPositionHor === 0 && currentPositionVert === pageWidth - size) {
             direction = 3;
-            return;
+            return changeImage();
         }
         if (currentPositionHor <= 0) {
             if (direction === 1) {
                 direction = 0;
+                return changeImage();
             }
             if (direction === 3) {
                 direction = 2;
+                return changeImage();
             }
         }
 
-        if (currentPositionHor >= pageWidth - 50) {
+        if (currentPositionHor >= pageWidth - size) {
             if (direction === 0) {
                 direction = 1;
+                return changeImage();
             }
             if (direction === 2) {
                 direction = 3;
+                return changeImage();
             }
         }
 
-        if (currentPositionVert >= pageHeight - 50) {
+        if (currentPositionVert >= pageHeight - size) {
             if (direction === 2) {
                 direction = 0;
+                return changeImage();
             }
             if (direction === 3) {
                 direction = 1;
+                return changeImage();
             }
         }
 
         if (currentPositionVert <= 0) {
             if (direction === 0) {
                 direction = 2;
+                return changeImage();
             }
             if (direction === 1) {
                 direction = 3;
+                return changeImage();
             }
         }
     }
@@ -133,6 +150,8 @@ document.addEventListener('DOMContentLoaded', () => {
         logoElement.style.top = `${currentPositionVert}px`;
         logoElement.style.left = `${currentPositionHor}px`;
     }
+
+    changeImage();
 
     setInterval(() => {
         adjustDirection();
